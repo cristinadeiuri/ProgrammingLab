@@ -86,6 +86,8 @@ for line in my_file:
 
         values.append(float(value))
 
+print(values)
+
 print(my_file.read())
 
 my_file.close()
