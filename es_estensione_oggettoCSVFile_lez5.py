@@ -1,3 +1,8 @@
+#estendere l'oggetto CSVFile chiamandolo NumericalCSVFile e facendo in modo che converta automaticamente a numero tutte le colonne tranne la prima (della data).
+#successivamente aggiungere due campi al file
+#gestire gli errori che verranno generati in modo che le linee vengano saltate senza bloccare il programma ma che venga stampato a schermo l'errore
+
+#definisco la classe padre
 class CSVFile():
 
     def __init__(self, name):
@@ -24,14 +29,25 @@ class CSVFile():
                 elements = line.split(',')
                 elements[-1] = elements[-1].strip()
                 data.append(elements)
+            
             file.close()
             return data
+
+    def add(self):
+        file = open(self.name, 'r+')
+        file.write('01-01-2015')
+        file.write('01-01-2015, ciao')
+        file.close()
+
 
 file = CSVFile('shampoo_sales.csv')
 print(file)
 print('Il nome del file è: "{}".'.format(file.name))
 print('Il contenuto del file è {}'.format(file.get_data()))
+print('Ho aggiunto: "{}" al file "{}".'.format(file.add(), file.name))
 
+
+#estendo la classe
 class NumericalCSVFile(CSVFile):
 
     def get_data(self):
@@ -59,8 +75,11 @@ class NumericalCSVFile(CSVFile):
                 numerical_data.append(numerical_row)
 
         return numerical_data
+     
 
 numerical_file = NumericalCSVFile('shampoo_sales.csv')
 print(numerical_file)
-print('I valori numerici del file sono: {}'.format(numerical_file.get_data()))        
+print('I valori numerici del file sono: {}'.format(numerical_file.get_data()))
+
+
 
