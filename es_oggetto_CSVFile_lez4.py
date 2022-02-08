@@ -9,23 +9,23 @@ class CSVFile():
         self.name = name
 
     #opzionale:
-    #def __str__(self):
-        #return 'Il nome del file è {}'.format(self.name)
+    def __str__(self):
+        return 'Il nome del file è {}'.format(self.name)
 
     def get_data(self):
-        file = open('shampoo_sales.csv', 'r')
-        strings = []
+        file = open(self.name, 'r')
+        data = []
         for line in file:
             elements = line.split()
-            strings.append(elements)
-        print(strings)
+            data.append(elements)
         file.close()
+        return data
                        
 #dò il nome al file e lo stampo
-file = CSVFile('shampoo_sales')
+file = CSVFile(name = 'shampoo_sales.csv')
 print(file)
-print('Il nome del file è:',format(file.name))
-file.get_data()
+print('Il nome del file è: "{}".'.format(file.name))
+print('Dati contenuti nel mio file: "{}”.'.format(file.get_data()))
 
 
 
